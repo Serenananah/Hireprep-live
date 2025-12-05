@@ -1,9 +1,16 @@
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import GlassCard from '../components/GlassCard';
 import { User } from '../types';
 import { authService } from '../services/authService';
 import { UserPlus, LogIn, AlertCircle, ArrowRight } from 'lucide-react';
+
+// ⭐ 新增：3D 背景所需的 imports
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import Galaxy from "../components/Galaxy";
+import Starfield from "../components/Starfield";
+
 
 interface AuthPageProps {
   onLogin: (user: User) => void;
@@ -66,119 +73,144 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] w-full px-4 animate-fade-in">
-      <GlassCard className="w-full max-w-md p-0 overflow-hidden relative">
+    <div className="relative w-full h-screen bg-black overflow-hidden font-['Rajdhani']">
+      
+      {/* ======= 动态粒子背景层（完整复制自 LandingPage） ======= */}
+      <div className="fixed inset-0 z-0">
+        <Canvas
+          camera={{ position: [0, 4, 8], fov: 55 }}
+          gl={{ antialias: false, powerPreference: "high-performance", alpha: false }}
+          dpr={[1, 2]}
+        >
+          <color attach="background" args={["#050505"]} />
+
+          <Suspense fallback={null}>
+            <group rotation={[0, 0, Math.PI / 8]}>
+              <Galaxy
+                config={{
+                  count: 40000,
+                  size: 0.012,
+                  radius: 5,
+                  branches: 4,
+                  spin: 1.2,
+                  randomness: 0.8,
+                  randomnessPower: 2.5,
+                  insideColor: "#ff8a5b",
+                  outsideColor: "#2b5aff",
+                }}
+              />
+            </group>
+            <Starfield />
+          </Suspense>
+
+          <OrbitControls enablePan={false} enableZoom rotateSpeed={0.4} />
+        </Canvas>
+
+        {/* Cinematic overlays */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
+        <div className="absolute inset-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+      </div>
+
+      
+      {/* ======= 前景 UI 层 ======= */}
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 overflow-y-auto pointer-events-auto -translate-y-12">
         
-        {/* Header Section */}
-        <div className="p-8 pb-6 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
-          <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600/20 text-blue-400 mb-4 mx-auto shadow-[0_0_15px_rgba(37,99,235,0.3)]">
-            {isLogin ? <LogIn className="w-6 h-6" /> : <UserPlus className="w-6 h-6" />}
-          </div>
-          <h2 className="text-2xl font-bold text-white text-center">
-            {isLogin ? 'Welcome Back' : 'Create Account'}
-          </h2>
-          <p className="text-gray-400 mt-2 text-center text-sm">
-            {isLogin ? 'Enter your credentials to continue' : 'Join Hireprep to start practicing'}
-          </p>
-        </div>
-
-        {/* Form Section */}
-        <div className="p-8 pt-6">
-          {error && (
-            <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center gap-3 text-red-300 text-sm animate-fade-in">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
-              {error}
+        {/* 登录卡片 */}
+        <GlassCard className="w-full max-w-md p-0 overflow-hidden relative backdrop-blur-xl bg-white/5 border border-white/10">
+          
+          {/* Header */}
+          <div className="p-8 pb-6 border-b border-white/10 bg-gradient-to-b from-white/5 to-transparent">
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600/20 text-blue-400 mb-4 mx-auto shadow-[0_0_15px_rgba(37,99,235,0.3)]">
+              {isLogin ? <LogIn className="w-6 h-6" /> : <UserPlus className="w-6 h-6" />}
             </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {!isLogin && (
-              <div className="space-y-1 animate-fade-in-up">
-                <label className="block text-xs font-bold text-blue-300 uppercase tracking-wider ml-1">Full Name</label>
-                <input
-                  type="text"
-                  required={!isLogin}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl glass-input placeholder-gray-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
-                  placeholder="e.g. Alex Chen"
-                />
-              </div>
-            )}
-            
-            <div className="space-y-1">
-              <label className="block text-xs font-bold text-blue-300 uppercase tracking-wider ml-1">Email Address</label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl glass-input placeholder-gray-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
-                placeholder="alex@example.com"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="block text-xs font-bold text-blue-300 uppercase tracking-wider ml-1">Password</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl glass-input placeholder-gray-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
-                placeholder="••••••••"
-              />
-            </div>
-
-            {!isLogin && (
-              <div className="space-y-1 animate-fade-in-up">
-                <label className="block text-xs font-bold text-blue-300 uppercase tracking-wider ml-1">Confirm Password</label>
-                <input
-                  type="password"
-                  required={!isLogin}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl glass-input placeholder-gray-500 focus:ring-2 focus:ring-blue-500/50 transition-all"
-                  placeholder="••••••••"
-                />
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold shadow-lg shadow-blue-900/30 transition-all hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mt-4"
-            >
-              {isLoading ? (
-                <span className="inline-block w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                <>
-                  {isLogin ? 'Sign In' : 'Create Account'}
-                  <ArrowRight className="w-5 h-5" />
-                </>
-              )}
-            </button>
-          </form>
-
-          {/* Toggle Switch */}
-          <div className="mt-8 pt-6 border-t border-white/5 text-center">
-            <p className="text-gray-400 text-sm">
-              {isLogin ? "Don't have an account yet?" : "Already have an account?"}
-              <button 
-                onClick={toggleMode}
-                className="ml-2 text-blue-400 hover:text-blue-300 font-bold hover:underline transition-all"
-              >
-                {isLogin ? 'Sign Up' : 'Log In'}
-              </button>
+            <h2 className="text-2xl font-bold text-white text-center">
+              {isLogin ? "Welcome Back" : "Create Account"}
+            </h2>
+            <p className="text-gray-400 mt-2 text-center text-sm">
+              {isLogin ? "Enter your credentials to continue" : "Join Hireprep to start practicing"}
             </p>
           </div>
-        </div>
-      </GlassCard>
-      
-      <p className="mt-6 text-xs text-gray-500 text-center max-w-sm">
-        <span className="font-bold text-gray-400">Secure Environment:</span><br/>
-        User data is encrypted and stored locally in your browser's secure storage.
-      </p>
+
+          {/* Form */}
+          <div className="p-8 pt-6">
+            {error && (
+              <div className="mb-6 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-300 text-sm flex items-center gap-3">
+                <AlertCircle className="w-4 h-4" />
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {!isLogin && (
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-blue-300 ml-1 uppercase tracking-wider">Full Name</label>
+                  <input
+                    type="text"
+                    value={name}
+                    required={!isLogin}
+                    onChange={(e) => setName(e.target.value)}
+                    className="glass-input w-full px-4 py-3 rounded-xl"
+                    placeholder="e.g. Alex Chen"
+                  />
+                </div>
+              )}
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-blue-300 ml-1 uppercase tracking-wider">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="glass-input w-full px-4 py-3 rounded-xl"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-blue-300 ml-1 uppercase tracking-wider">Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="glass-input w-full px-4 py-3 rounded-xl"
+                />
+              </div>
+
+              {!isLogin && (
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-blue-300 ml-1 uppercase tracking-wider">Confirm Password</label>
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    required={!isLogin}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="glass-input w-full px-4 py-3 rounded-xl"
+                  />
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-4 rounded-xl bg-white/10 border border-white/30 text-white font-bold shadow-lg mt-4 backdrop-blur-lg hover:bg-white/20 transition-all"
+              >
+                {isLoading ? "Loading..." : isLogin ? "Sign In" : "Create Account"}
+              </button>
+            </form>
+
+            {/* Toggle */}
+            <div className="mt-8 pt-6 border-t border-white/5 text-center">
+              <p className="text-gray-400 text-sm">
+                {isLogin ? "Don't have an account?" : "Already have an account?"}
+                <button onClick={toggleMode} className="ml-2 text-blue-400 hover:underline font-bold">
+                  {isLogin ? "Sign Up" : "Log In"}
+                </button>
+              </p>
+            </div>
+          </div>
+        </GlassCard>
+      </div>
     </div>
   );
 };

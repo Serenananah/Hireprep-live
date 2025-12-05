@@ -5,7 +5,7 @@ import { InterviewSession } from '../types';
 import GlassCard from '../components/GlassCard';
 import { 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer,
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, AreaChart, Area, Legend
 } from 'recharts';
 import { Download, Home, FileText, CheckCircle2, Target, Award, Share2, TrendingUp, Clock, Zap } from 'lucide-react';
 
@@ -239,7 +239,7 @@ export default function FeedbackPage({ session, onHome }: FeedbackPageProps) {
   };
 
   return (
-    <div className="max-w-[1500px] mx-auto space-y-8 animate-fade-in pb-12">
+    <div className="w-full space-y-8 pb-12 px-6">
 
       {/* HEADER */}
       <div className="flex flex-col gap-6 pb-6 border-b border-white/5">
@@ -262,9 +262,6 @@ export default function FeedbackPage({ session, onHome }: FeedbackPageProps) {
               >
                 <Download className="w-4 h-4" /> Export PDF
               </button>
-              <button className="px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white flex items-center gap-2 transition-all border border-white/5 font-medium">
-                <Share2 className="w-4 h-4" /> Share
-              </button>
               <button 
                 onClick={onHome}
                 className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-2 shadow-lg shadow-blue-900/20 transition-all font-bold"
@@ -276,7 +273,7 @@ export default function FeedbackPage({ session, onHome }: FeedbackPageProps) {
 
          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* LEFT STACK */}
-            <div className="lg:col-span-8 space-y-4">
+            <div className="lg:col-span-9 space-y-4">
                {/* Job Metadata Bar */}
                <GlassCard className="p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-blue-900/5 border-blue-500/10">
                   {[
@@ -391,7 +388,7 @@ export default function FeedbackPage({ session, onHome }: FeedbackPageProps) {
             </div>
 
             {/* RIGHT: Radar */}
-            <GlassCard className="lg:col-span-4 flex flex-col h-full min-h-[260px]">
+            <GlassCard className="lg:col-span-3 flex flex-col h-full min-h-[260px]">
                <div className="flex items-center justify-between mb-2">
                   <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <Target className="w-4 h-4 text-blue-400" />
@@ -453,12 +450,33 @@ export default function FeedbackPage({ session, onHome }: FeedbackPageProps) {
             <div className="flex-1 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
                <LineChart data={questionLineData} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                  <XAxis dataKey="name" stroke="#64748b" tick={{fontSize: 11}} />
-                  <YAxis stroke="#64748b" domain={[0, 10]} tick={{fontSize: 11}} />
-                  <Line type="monotone" dataKey="content_score" stroke="#3b82f6" strokeWidth={3} />
-                  <Line type="monotone" dataKey="delivery_score" stroke="#a855f7" strokeWidth={3} />
+               <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+               <XAxis dataKey="name" stroke="#64748b" tick={{fontSize: 11}} />
+               <YAxis stroke="#64748b" domain={[0, 10]} tick={{fontSize: 11}} />
+
+               {/* Tooltip */}
+               <Tooltip 
+                  contentStyle={{
+                     backgroundColor: 'rgba(15,23,42,0.95)',
+                     borderColor: 'rgba(255,255,255,0.1)',
+                     borderRadius: 8,
+                     color: '#fff',
+                  }}
+               />
+
+               <Legend 
+                  verticalAlign="top"
+                  align="right"
+                  wrapperStyle={{ 
+                     color: "#cbd5e1",
+                     paddingBottom: 8,
+                     fontSize: 12
+                  }}
+               />
+               <Line type="monotone" dataKey="content_score" name="Content Score" stroke="#3b82f6" strokeWidth={3} />
+               <Line type="monotone" dataKey="delivery_score" name="Delivery Score" stroke="#a855f7" strokeWidth={3} />
                </LineChart>
+
             </ResponsiveContainer>
             </div>
          </GlassCard>
@@ -474,14 +492,25 @@ export default function FeedbackPage({ session, onHome }: FeedbackPageProps) {
             <div className="flex-1 min-h-0">
             <ResponsiveContainer width="100%" height="100%">
                <AreaChart data={historyData}>
-                  <Area 
+               {/* Tooltip */}
+               <Tooltip 
+                  contentStyle={{
+                     backgroundColor: 'rgba(15,23,42,0.95)',
+                     borderColor: 'rgba(255,255,255,0.1)',
+                     borderRadius: 8,
+                     color: '#fff',
+                  }}
+               />
+
+               <Area 
                   type="monotone" 
                   dataKey="score" 
                   stroke="#10b981" 
                   strokeWidth={3} 
                   fill="#10b98155" 
-                  />
+               />
                </AreaChart>
+
             </ResponsiveContainer>
             </div>
          </GlassCard>

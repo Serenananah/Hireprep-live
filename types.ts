@@ -1,4 +1,18 @@
 
+export interface GalaxyConfig {
+  count: number;
+  size: number;
+  radius: number;
+  branches: number;
+  spin: number;
+  randomness: number;
+  randomnessPower: number;
+  insideColor: string;
+  outsideColor: string;
+}
+
+export type RGB = { r: number; g: number; b: number };
+
 export enum Page {
   LANDING = 'LANDING',
   AUTH = 'AUTH',

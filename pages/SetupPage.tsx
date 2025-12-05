@@ -73,14 +73,14 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto space-y-8 animate-fade-in pb-12">
+    <div className="w-full max-w-7xl mx-auto space-y-6 animate-fade-in pb-4">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-end gap-4 pb-6 border-b border-white/5">
         <div>
           <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">
             Interview Setup
           </h2>
-          <p className="text-gray-400 mt-3 text-lg">
+          <p className="text-gray-400 mt-3 text-base">
             Configure your simulation environment
           </p>
         </div>
@@ -96,7 +96,7 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
         {/* Left Column: Role Selection (8 cols) */}
         <div className="lg:col-span-8 space-y-8">
           
-          <GlassCard className="space-y-8 p-8">
+          <GlassCard className="space-y-5 p-3">
             <div className="flex items-center gap-4 mb-2">
               <div className="p-3 rounded-xl bg-blue-500/20 text-blue-400 shadow-lg shadow-blue-900/20">
                  <Briefcase className="w-6 h-6" />
@@ -107,10 +107,10 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
               </div>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-4">
                {/* Industry Dropdown */}
                <div className="relative z-20">
-                  <label className="text-xs font-bold text-blue-300 uppercase tracking-widest mb-3 block ml-1">Select Industry</label>
+                  <label className="text-[10px] font-bold text-blue-300 uppercase tracking-widest mb-3 block ml-1">Select Industry</label>
                   <div className="relative group">
                     <select
                       value={industry}
@@ -119,7 +119,7 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
                         setSelectedRole(null);
                       }}
                       disabled={isProcessing}
-                      className="w-full appearance-none bg-black/40 border border-white/10 text-white text-lg rounded-2xl px-6 py-4 pr-12 focus:outline-none focus:border-blue-500/50 focus:bg-black/60 focus:ring-4 focus:ring-blue-500/10 transition-all cursor-pointer hover:border-white/20 disabled:opacity-50"
+                      className="w-full appearance-none bg-black/40 border border-white/10 text-white text-base rounded-2xl px-6 py-4 pr-12 focus:outline-none focus:border-blue-500/50 focus:bg-black/60 focus:ring-4 focus:ring-blue-500/10 transition-all cursor-pointer hover:border-white/20 disabled:opacity-50"
                     >
                       {INDUSTRIES.map(ind => (
                         <option key={ind} value={ind} className="bg-slate-900 text-white py-2">
@@ -140,7 +140,7 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
                   </label>
                   
                   {filteredRoles.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {filteredRoles.map(role => (
                         <GlassCard 
                           key={role.id} 
@@ -164,7 +164,7 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
                             )}
                           </div>
                           
-                          <h4 className={`text-lg font-bold mb-4 transition-colors relative z-10 ${selectedRole?.id === role.id ? 'text-white' : 'text-gray-200 group-hover:text-white'}`}>
+                          <h4 className={`text-base font-bold mb-2 transition-colors relative z-10 ${selectedRole?.id === role.id ? 'text-white' : 'text-gray-200 group-hover:text-white'}`}>
                             {role.title}
                           </h4>
                           
@@ -197,7 +197,7 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
         <div className="lg:col-span-4 space-y-8">
           
           {/* Settings Card */}
-          <GlassCard className="space-y-8 p-8">
+          <GlassCard className="space-y-6 p-4">
             <div className="flex items-center gap-4 mb-2">
                <div className="p-3 rounded-xl bg-purple-500/20 text-purple-400 shadow-lg shadow-purple-900/20">
                   <Gauge className="w-6 h-6" />
@@ -258,7 +258,7 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
           </GlassCard>
 
           {/* Upload Card */}
-          <GlassCard className="p-8">
+          <GlassCard className="p-4">
              <div className="flex items-center gap-4 mb-6">
                <div className="p-3 rounded-xl bg-cyan-500/20 text-cyan-400 shadow-lg shadow-cyan-900/20">
                   <Upload className="w-6 h-6" />
@@ -296,14 +296,37 @@ const SetupPage: React.FC<SetupPageProps> = ({ user, onStartInterview }) => {
           <button
             onClick={handleStart}
             disabled={!selectedRole || isProcessing}
-            className="w-full group relative py-5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xl shadow-xl shadow-blue-900/40 transition-all hover:shadow-blue-900/60 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none overflow-hidden"
+            className="
+              w-full group relative py-4 rounded-2xl 
+              bg-gradient-to-br from-white to-white/80
+              text-black font-bold text-lg 
+              shadow-[0_8px_30px_rgba(255,255,255,0.15)]
+              hover:shadow-[0_10px_40px_rgba(255,255,255,0.25)]
+              hover:from-white hover:to-white/90
+              transition-all duration-300 
+              backdrop-blur-xl
+              disabled:opacity-40 disabled:cursor-not-allowed
+            "
           >
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             <span className="relative flex items-center justify-center gap-3">
-              {isProcessing ? 'Initializing Environment...' : 'Start Simulation'} 
-              {!isProcessing && <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />}
+              {isProcessing ? 'Initializing...' : 'Start Simulation'}
+              {!isProcessing && (
+                <ArrowRight className="w-5 h-5 text-black group-hover:translate-x-1 transition-transform" />
+              )}
             </span>
+
+            {/* Glossy highlight overlay */}
+            <div
+              className="
+                absolute inset-0 rounded-2xl 
+                bg-gradient-to-t from-white/20 to-transparent 
+                opacity-70 group-hover:opacity-90
+                pointer-events-none
+              "
+            />
           </button>
+
+
 
         </div>
       </div>

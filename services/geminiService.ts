@@ -103,7 +103,6 @@ export class GeminiLiveClient {
     EASY MODE:
     - Tone: warm, gentle, supportive.
     - Ask easy, high-level questions.
-    - Encourage candidate softly; give hints if they struggle.
     STANDARD MODE:
     - Tone: professional, neutral.
     - Ask realistic mid-level interview questions.
@@ -111,8 +110,7 @@ export class GeminiLiveClient {
     HARD MODE:
     - Tone: firm, serious, no-nonsense.
     - Ask difficult, high-stress scenario or technical questions.
-    - Drill down aggressively.
-    - Expect high rigor; no hints unless requested.
+    - Drill down aggressively. Expect high rigor
 
     
     HIDDEN TOOLS:

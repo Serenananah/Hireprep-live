@@ -116,13 +116,7 @@ const App: React.FC = () => {
   return (
     <Layout>
       {/* Global Header/Nav Overlay */}
-      <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-gradient-to-b from-[#0f172a] to-transparent pointer-events-none">
-        <div className="pointer-events-auto flex items-center gap-2 cursor-pointer" onClick={() => setCurrentPage(Page.LANDING)}>
-          <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center font-bold text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-            H
-          </div>
-          <span className="text-xl font-bold tracking-tight text-white drop-shadow-md">Hireprep</span>
-        </div>
+      <header className="fixed top-0 left-0 w-full z-50 px-6 py-2 flex justify-end items-center bg-gradient-to-b from-[#0f172a] to-transparent pointer-events-none">
         
         {user ? (
           <div className="pointer-events-auto flex items-center gap-4 group relative">
@@ -166,7 +160,7 @@ const App: React.FC = () => {
       </header>
 
       {/* Page Content */}
-      <main className="flex-1 w-full pt-20 pb-10 px-4 flex flex-col">
+      <main className={`flex-1 w-full px-4 flex flex-col ${currentPage === Page.LANDING ? "pt-0" : "pt-20"}`}>
         {renderPage()}
       </main>
     </Layout>

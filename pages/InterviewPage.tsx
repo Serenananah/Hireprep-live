@@ -86,20 +86,29 @@ const InterviewPage: React.FC<InterviewPageProps> = ({ session, onEndInterview }
       {/* --- START OVERLAY --- */}
       {state.connectionState === 'DISCONNECTED' && (
         <div className="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-md flex items-center justify-center">
-          <div className="text-center space-y-6 max-w-md p-8 bg-black/50 border border-white/10 rounded-3xl shadow-2xl">
-            <h2 className="text-3xl font-bold text-white">Start Interview</h2>
-            <p className="text-gray-300">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 
+                p-10 rounded-3xl shadow-2xl text-center">
+            <h2 className="text-2xl font-bold text-white">Start Interview</h2>
+            <p className="text-white/60 mt-2">
                Establish a real-time, bi-directional voice connection with the AI Interviewer.
             </p>
             <button 
               onClick={handleStartSession} 
               disabled={isConnecting}
-              className="w-full py-4 bg-blue-600 rounded-xl text-white font-bold hover:scale-105 transition-all flex items-center justify-center gap-2"
+              className="
+                w-full py-4 rounded-xl 
+                bg-white/10 border border-white/30 
+                text-white font-bold shadow-lg 
+                mt-4 backdrop-blur-lg 
+                hover:bg-white/20 transition-all
+                flex items-center justify-center gap-2
+              "
             >
               {isConnecting ? (
                   <>Connecting <span className="animate-pulse">...</span></>
               ) : "Connect Live Agent"}
             </button>
+
           </div>
         </div>
       )}
@@ -107,7 +116,7 @@ const InterviewPage: React.FC<InterviewPageProps> = ({ session, onEndInterview }
       {/* ============================
           LEFT MAIN COLUMN
       ============================= */}
-      <div className="flex-[2] flex flex-col gap-4 min-w-0">
+      <div className="w-full lg:w-[70%] flex flex-col gap-4 min-w-0">
 
         {/* Avatar / Visualizer */}
         <div className="relative h-[300px] md:h-[350px] rounded-3xl overflow-hidden shadow-xl bg-black border border-white/10 flex-none group">
@@ -182,7 +191,7 @@ const InterviewPage: React.FC<InterviewPageProps> = ({ session, onEndInterview }
       {/* ============================
           RIGHT COLUMN (Controls)
       ============================= */}
-      <div className="w-full lg:w-[320px] flex flex-col gap-4 flex-shrink-0">
+      <div className="w-full lg:w-[30%] flex flex-col gap-4 flex-shrink-0">
         
         {/* Camera Feed */}
         <GlassCard className="aspect-[4/3] p-0 overflow-hidden relative bg-black rounded-3xl border border-white/20 shadow-xl">
@@ -236,12 +245,12 @@ const InterviewPage: React.FC<InterviewPageProps> = ({ session, onEndInterview }
              </div>
              
              {/* Next Topic Button (Hidden Control) */}
-             <button
+             {/*<button
                 onClick={handleNextTopic}
                 className="w-full h-12 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-200 font-bold border border-blue-500/20 flex items-center justify-center gap-2 transition-all"
              >
                 Next Topic <ChevronRight className="w-4 h-4" />
-             </button>
+             </button>*/}
 
              <button
                 onClick={handleEndSession}
