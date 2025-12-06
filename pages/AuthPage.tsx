@@ -78,7 +78,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onLogin }) => {
       {/* ======= 动态粒子背景层（完整复制自 LandingPage） ======= */}
       <div className="fixed inset-0 z-0">
         <Canvas
-          camera={{ position: [0, 4, 8], fov: 55 }}
+          camera={{ position: [0, 0.8, 2.8], fov: 55 }}
           gl={{ antialias: false, powerPreference: "high-performance", alpha: false }}
           dpr={[1, 2]}
         >
