@@ -30,7 +30,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
       {/* 3D Background Layer */}
       <div className="fixed inset-0 z-0">
         <Canvas
-          camera={{ position: [0, 2.0, 4.0], fov: 55 }}
+          camera={{ position: [0, 3.0, 5.0], fov: 55 }}
           gl={{
             antialias: false,
             powerPreference: "high-performance",
