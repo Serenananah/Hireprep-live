@@ -1,4 +1,4 @@
-
+// services/geminiService.ts
 import { GoogleGenAI, LiveServerMessage, Type, FunctionDeclaration, Modality } from "@google/genai";
 import { InterviewConfig, Difficulty } from "../types";
 
