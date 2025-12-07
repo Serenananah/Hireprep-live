@@ -1,66 +1,76 @@
 // backend/server.js
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
+const Database = require("better-sqlite3");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// === 1. Initialize App ===
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// === 1. Initialize database ===
-const db = new sqlite3.Database("./db.sqlite", (err) => {
-  if (err) console.error(err);
-  console.log("SQLite database connected.");
-});
+// === 2. Initialize SQLite (better-sqlite3) ===
+const db = new Database("./db.sqlite");
 
-// === 2. Create users table ===
-db.run(`
-CREATE TABLE IF NOT EXISTS users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT,
-  email TEXT UNIQUE,
-  password TEXT
-)
-`);
+// Create users table (sync + safer)
+db.prepare(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    email TEXT UNIQUE,
+    password TEXT
+  )
+`).run();
+
+console.log("SQLite database connected (better-sqlite3).");
 
 // === 3. Register API ===
 app.post("/api/register", async (req, res) => {
   const { name, email, password } = req.body;
 
-  const hashed = await bcrypt.hash(password, 10);
+  try {
+    const hashed = await bcrypt.hash(password, 10);
 
-  db.run(
-    "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-    [name, email, hashed],
-    function (err) {
-      if (err) return res.status(400).json({ error: "Email already exists." });
+    const stmt = db.prepare(`
+      INSERT INTO users (name, email, password)
+      VALUES (?, ?, ?)
+    `);
 
-      return res.json({
-        id: this.lastID,
-        name,
-        email
-      });
+    const result = stmt.run(name, email, hashed);
+
+    return res.json({
+      id: result.lastInsertRowid,
+      name,
+      email
+    });
+  } catch (err) {
+    if (err.code === "SQLITE_CONSTRAINT_UNIQUE") {
+      return res.status(400).json({ error: "Email already exists." });
     }
-  );
+    return res.status(500).json({ error: "Server error." });
+  }
 });
 
 // === 4. Login API ===
-app.post("/api/login", (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
 
-  db.get("SELECT * FROM users WHERE email = ?", [email], async (err, user) => {
-    if (!user) return res.status(400).json({ error: "User not found." });
+  const user = db.prepare("SELECT * FROM users WHERE email = ?").get(email);
 
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.status(400).json({ error: "Invalid password." });
+  if (!user) {
+    return res.status(400).json({ error: "User not found." });
+  }
 
-    return res.json({
-      id: user.id,
-      name: user.name,
-      email: user.email
-    });
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.status(400).json({ error: "Invalid password." });
+  }
+
+  return res.json({
+    id: user.id,
+    name: user.name,
+    email: user.email
   });
 });
 
