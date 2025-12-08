@@ -1,44 +1,95 @@
-# Hireprep –  Multimodal Interview Coach & Simulation Platform
+# Hireprep – Multimodal Interview Coach & Simulation Platform
 
-Hireprep is a next-generation multimodal interview coach that blends AI avatars, real-time video & audio interaction, and behavioral intelligence to offer deeply realistic mock interview experiences. Its mission is to make world-class interview training accessible to everyone.
+Hireprep is a multimodal interview coach blending AI avatars, real-time audio/video interaction, and behavioral intelligence to create realistic mock interview experiences.
 
-## Key Features & Unique Selling Proposition
-The logic of a intelligence agent can de divided to three steps:(i)Perception -- Multimodal module;(ii)Decision：Gemini model;(iii)Action
+## Key Features
+
+1. **Reasoning-Driven Interview Agent**  
+   Uses Gemini Live API to control interview flow: follow-ups, competency switching, wrap-up logic.
+
+2. **Configurable Interview Scenarios**  
+   Industry, role, difficulty, duration, JD-aware and resume-aware prompting.
+
+3. **Lightweight Multimodal Analysis**  
+   MediaPipe FaceMesh + Iris (gaze, blink, eye-contact) and Web Audio API (speaking rate, pauses, volume).
+
+4. **Comprehensive Feedback**  
+   Content scoring, communication metrics, filler words, body-language estimates, trend charts.
+
 ---
 
-1. **Controlled, Reasoning-Driven Interview Agent**
-    1. Hireprep uses xxx(not decided) to drive a fully controlled interview flow. The agent **reasons internally** about the candidate’s content and behavioral signals, then decides whether to **advance to the next competency, issue a deeper follow-up, or begin wrapping up**.
-2. **Fully Configurable & Realistic Interview Scenarios**
-    1. Users can configure **interview persona (HR / Tech / Boss), difficulty level, duration, and competency focus**. The system uses **resume- and JD-aware prompting** to generate targeted, role-specific questions (e.g., HR, behavioral, technical). This produces a personalized and realistic mock interview aligned with real hiring expectations—without requiring a heavy RAG subsystem.
-        1. Generative AI for LLM-based generative, eg: gemini-2.5-flash …, configurable via **different prompts**
-3. **Lightweight, High-Impact Multimodal Analysis**：
-    1. The platform combines **MediaPipe FaceMesh + Iris** for precise gaze tracking with **Web Audio API** for prosodic analysis. This setup enables real-time, low-latency estimation of **eye-contact ratio, speaking rate, pause ratio, and volume stability**, without relying on heavy vision or speech-emotion models.
-4. **Comprehensive Feedback & Progress Tracking**：
-    1. After each interview, users receive content quality scores, communication scores, speaking pace analysis, filler word frequency, vocal tone variability, and body language ratings with timestamps and clip-based feedback, while a historical dashboard displays radar charts, improvement curves, skill trends, and personalized coaching suggestions.
+## Tech Stack
+
+### Frontend
+- React + Vite + TypeScript  
+- TailwindCSS  
+- MediaPipe FaceMesh/Iris  
+- Web Audio API  
+- Three.js + React-Three-Fiber (Galaxy & Starfield backgrounds)
+
+### Backend
+- Node.js + Express  
+- SQLite (`db.sqlite`)  
+- Auth API + Session storage  
+- File parsing utilities
+
+### AI Layer
+- Gemini 2.0 Flash / 2.5 Audio (Live API)  
+- Streaming audio generation + bidirectional control signals  
+- Structured system prompts for interview flow
 
 ---
 
-# Run and deploy your AI Studio app
+## Page Previews
 
-This contains everything you need to run your app locally.
+### Landing Page
+![Landing](./figures/Landing.png)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1loYikYTcEZZL3-DkC15qlmdllc6IOkOn
+### Sign In
+![Sign In](./figures/sign in.png)
 
-## Run Locally
+### Sign Up
+![Sign Up](./figures/sign up.png)
+
+### Setup Page
+![Setup](./figures/set up.png)
+
+### Interview Page
+![Interview](./figures/interview.png)
+
+### Feedback Pages
+![Feedback 1](./figures/feedback-1.png)  
+![Feedback 2](./figures/feedback-2.png)
+
+---
+
+# Run Locally
 
 **Prerequisites:**  Node.js Backend + React&Vite Fronted
 
+### 1. Install dependencies
 
-1. Install dependencies:
-   `npm install`
-   ```bash
-   cd backend
-   npm install
-   ```
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   ```bash
-   cd backend
-   node server.js
-   ```
-   `npm run dev`
+```bash
+npm install
+cd backend
+npm install
+```
+
+### 2. Set Gemini API Key
+Create .env.local:
+
+```bash
+GEMINI_API_KEY=your_key_here
+```
+
+### 3. Start Backend
+
+```bash
+cd backend
+node server.js
+```
+
+### 4. Start Frontend
+```bash
+npm run dev
+```
