@@ -37,8 +37,6 @@ Hireprep is a multimodal interview coach blending AI avatars, real-time audio/vi
 ![Streaming](https://img.shields.io/badge/Live_Audio-Streaming-orange)
 
 
----
-
 ## Page Previews
 
 ### Landing Page
