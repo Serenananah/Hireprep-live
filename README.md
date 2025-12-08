@@ -43,13 +43,13 @@ Hireprep is a multimodal interview coach blending AI avatars, real-time audio/vi
 ![Landing](./figures/Landing.png)
 
 ### Sign In
-![Sign In](./figures/sign in.png)
+![Sign In](./figures/signin.png)
 
 ### Sign Up
-![Sign Up](./figures/sign up.png)
+![Sign Up](./figures/signup.png)
 
 ### Setup Page
-![Setup](./figures/set up.png)
+![Setup](./figures/setup.png)
 
 ### Interview Page
 ![Interview](./figures/interview.png)
