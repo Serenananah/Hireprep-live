@@ -19,7 +19,7 @@ Hireprep is a multimodal interview coach blending AI avatars, real-time audio/vi
 
 ## Tech Stack
 
-### Frontend  
+![Frontend](https://img.shields.io/badge/Frontend-React_18_|_Vite_|_TypeScript-0A7ACC?logo=react&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-Build-646CFF?logo=vite&logoColor=white)
 ![TS](https://img.shields.io/badge/TypeScript-Strong-3178C6?logo=typescript&logoColor=white)
@@ -27,12 +27,12 @@ Hireprep is a multimodal interview coach blending AI avatars, real-time audio/vi
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-FaceMesh-yellow?logo=google&logoColor=white)
 ![Three.js](https://img.shields.io/badge/Three.js-3D-black?logo=three.js&logoColor=white)
 
-### Backend  
+![Backend](https://img.shields.io/badge/Backend-Node.js_|_Express_|_SQLite-3C873A?logo=node.js&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-Server-6DA55F?logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-API-black?logo=express&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-DB-003B57?logo=sqlite&logoColor=white)
 
-### AI Layer  
+![AI Layer](https://img.shields.io/badge/AI_Layer-Gemini_2.0/2.5_Live_API-8E44AD?logo=google&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Gemini-2.5%20Audio-blueviolet?logo=google&logoColor=white)
 ![Streaming](https://img.shields.io/badge/Live_Audio-Streaming-orange)
 
