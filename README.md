@@ -16,27 +16,26 @@ Hireprep is a multimodal interview coach blending AI avatars, real-time audio/vi
 4. **Comprehensive Feedback**  
    Content scoring, communication metrics, filler words, body-language estimates, trend charts.
 
----
 
 ## Tech Stack
 
-### Frontend
-- React + Vite + TypeScript  
-- TailwindCSS  
-- MediaPipe FaceMesh/Iris  
-- Web Audio API  
-- Three.js + React-Three-Fiber (Galaxy & Starfield backgrounds)
+### Frontend  
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Build-646CFF?logo=vite&logoColor=white)
+![TS](https://img.shields.io/badge/TypeScript-Strong-3178C6?logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/TailwindCSS-Design-38B2AC?logo=tailwind-css&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-FaceMesh-yellow?logo=google&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-3D-black?logo=three.js&logoColor=white)
 
-### Backend
-- Node.js + Express  
-- SQLite (`db.sqlite`)  
-- Auth API + Session storage  
-- File parsing utilities
+### Backend  
+![Node.js](https://img.shields.io/badge/Node.js-Server-6DA55F?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-API-black?logo=express&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-DB-003B57?logo=sqlite&logoColor=white)
 
-### AI Layer
-- Gemini 2.0 Flash / 2.5 Audio (Live API)  
-- Streaming audio generation + bidirectional control signals  
-- Structured system prompts for interview flow
+### AI Layer  
+![Gemini](https://img.shields.io/badge/Gemini-2.5%20Audio-blueviolet?logo=google&logoColor=white)
+![Streaming](https://img.shields.io/badge/Live_Audio-Streaming-orange)
+
 
 ---
 
