@@ -36,6 +36,8 @@ Hireprep is a multimodal interview coach blending AI avatars, real-time audio/vi
 ![Gemini](https://img.shields.io/badge/Gemini-2.5%20Audio-blueviolet?logo=google&logoColor=white)
 ![Streaming](https://img.shields.io/badge/Live_Audio-Streaming-orange)
 
+## Deployed Website Access
+The whole project has been deployed in Google Cloud, see [HirePrep Demo](https://hireprep-12-7-32652408982.us-west1.run.app/)
 
 ## Page Previews
 
