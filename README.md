@@ -37,7 +37,16 @@ Hireprep is a multimodal interview coach blending AI avatars, real-time audio/vi
 ![Streaming](https://img.shields.io/badge/Live_Audio-Streaming-orange)
 
 ## Deployed Website Access
-The whole project has been deployed in Google Cloud, see [HirePrep Demo](https://hireprep-12-7-32652408982.us-west1.run.app/)
+
+We provide **two deployment versions** of the HirePrep Interview Platform:
+
+### **1. Serverless Deployment (Recommended) — No Backend Required**  
+This version runs **entirely in the browser** and does **not require any local backend or database setup**, see [Quick Preview Version](https://hireprep-12-7-1036920270692.us-west1.run.app/)
+
+
+### **2. Full-Stack Deployment (Requires Local Backend & SQLite)**  
+This version connects to the original **Express + SQLite** backend.  
+To use this version, you must start the backend server locally, and see [Configured Version](https://hireprep-12-7-32652408982.us-west1.run.app/)
 
 ## Page Previews
 
