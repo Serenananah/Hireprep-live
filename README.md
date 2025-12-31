@@ -63,7 +63,7 @@ To use this version, you must start the backend server locally, and see [Configu
 ![Setup](./figures/setup.png)
 
 ### Interview Page
-![Interview](./figures/interview.png)
+![Interview](./figures/Interview.png)
 
 ### Feedback Pages
 ![Feedback 1](./figures/feedback-1.png)  
