@@ -71,12 +71,12 @@ To use this version, you must start the backend server locally, and see [Configu
 ![Feedback 3](./figures/feedback-3.png)
 
 ### Correction Page
-![Correction 1](./figures/correct-1.png) 
-![Correction 2](./figures/correct-2.png) 
-![Correction 3](./figures/correct-3.png) 
-![Correction 4](./figures/correct-4.png) 
-![Correction 5](./figures/correct-5.png) 
-![Correction 6](./figures/correct-6.png) 
+![Correction 1](./figures/Correct-1.png) 
+![Correction 2](./figures/Correct-2.png) 
+![Correction 3](./figures/Correct-3.png) 
+![Correction 4](./figures/Correct-4.png) 
+![Correction 5](./figures/Correct-5.png) 
+![Correction 6](./figures/Correct-6.png) 
 
 
 ---
